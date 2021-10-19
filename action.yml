@@ -46,9 +46,8 @@ runs:
           for i in "${array[@]}"
           do
             echo "Running this once"
-            echo $i
-            #command="${i} ${OPTIONS}"
-            #echo $command
-            #eval $command
+            command="${i} ${OPTIONS}"
+            echo $command
+            eval $command
           done
         fi
