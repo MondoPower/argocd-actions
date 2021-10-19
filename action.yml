@@ -45,7 +45,6 @@ runs:
           read -r -a array <<< "${{ inputs.commands }}"
           for i in "${array[@]}"
           do
-            echo "Running this once"
             command="${i} ${OPTIONS}"
             echo $command
             eval $command
