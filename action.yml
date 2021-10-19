@@ -36,6 +36,7 @@ runs:
         export PATH=$PATH:/tmp
 
         OPTIONS="--port-forward-namespace ${{ inputs.namespace }} --port-forward --plaintext"
+        echo "::set-output name=options::$OPTIONS"
 
         argocd login --username '${{ inputs.username }}' --password '${{ inputs.password }}' $OPTIONS
 
@@ -46,6 +47,6 @@ runs:
           for i in $commands
           do
             echo "$commands $OPTIONS"
-            echo "$($commands $OPTIONS)"
+            eval "$commands $OPTIONS"
           done
         fi
