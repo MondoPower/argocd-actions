@@ -41,11 +41,12 @@ runs:
         argocd login --username '${{ inputs.username }}' --password '${{ inputs.password }}' $OPTIONS
 
         if [[ -n "${{ inputs.commands }}" ]]; then
-          IFS=";"
+          export IFS=";"
           for i in "${{ inputs.commands }}"
           do
             echo "Running this once"
-            command=echo "${i} ${OPTIONS}"
+            echo $i
+            command="${i} ${OPTIONS}"
             echo $command
             eval $command
           done
