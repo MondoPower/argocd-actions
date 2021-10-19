@@ -43,10 +43,10 @@ runs:
         if [[ -n "${{ inputs.commands }}" ]]; then
           IFS=$'\n'
           read -a commands <<< "${{ inputs.commands }}"
-          
+          echo $commands
           for i in $commands
           do
-            echo "$commands $OPTIONS"
-            eval "$commands $OPTIONS"
+            echo "$i $OPTIONS"
+            eval "$i $OPTIONS"
           done
         fi
