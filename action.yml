@@ -33,6 +33,7 @@ runs:
         chmod +x /tmp/argocd
 
         echo "::set-output name=argocd::/tmp/argocd"
+        export PATH=$PATH:/tmp
 
         OPTIONS="--port-forward-namespace ${{ inputs.namespace }} --port-forward --plaintext"
 
