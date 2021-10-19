@@ -45,7 +45,7 @@ runs:
           for i in "${{ inputs.commands }}"
           do
             echo "Running this once"
-            command="$i $OPTIONS"
+            command=echo "$i $OPTIONS"
             echo $command
             eval $command
           done
