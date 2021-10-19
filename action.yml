@@ -43,7 +43,7 @@ runs:
         if [[ -n "${{ inputs.commands }}" ]]; then
           export IFS=";"
           read -r -a array <<< "${{ inputs.commands }}"
-          for i in "$array"
+          for i in "${array[@]}"
           do
             echo "Running this once"
             echo $i
