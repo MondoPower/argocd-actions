@@ -44,7 +44,9 @@ runs:
           IFS=";"
           for i in "${{ inputs.commands }}"
           do
-            echo "$i $OPTIONS"
-            eval "$i $OPTIONS"
+            echo "Running this once"
+            command="$i $OPTIONS"
+            echo $command
+            eval $command
           done
         fi
