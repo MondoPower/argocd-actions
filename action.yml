@@ -12,7 +12,7 @@ inputs:
     description: 'namespace of argo instance'
     required: true
   commands:
-    description: 'argo commands to run. new line delimited'
+    description: 'argo commands to run. ; delimited'
     required: false
     default: ''
     
@@ -41,8 +41,7 @@ runs:
         argocd login --username '${{ inputs.username }}' --password '${{ inputs.password }}' $OPTIONS
 
         if [[ -n "${{ inputs.commands }}" ]]; then
-          IFS="
-          "
+          IFS=";"
           read -a commands <<< "${{ inputs.commands }}"
           echo $commands
           for i in $commands
