@@ -40,7 +40,7 @@ runs:
         argocd login --username '${{ inputs.username }}' --password '${{ inputs.password }}' $OPTIONS
 
         if [[ -n "${{ inputs.commands }}" ]]; then
-          IFS='\n'
+          IFS=$'\n'
           read -a commands <<< "${{ inputs.commands }}"
           
           for i in $commands
