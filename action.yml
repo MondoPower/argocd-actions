@@ -1,0 +1,49 @@
+name: MondoPower/argocd
+author: MondoPower
+description: 'Setup argocd'
+inputs:
+  username:
+    description: 'A argocd username'
+    required: true
+  password:
+    description: 'Password for the assigned argocd username'
+    required: true
+  namespace:
+    description: 'namespace of argo instance'
+    required: true
+  commands:
+    description: 'argo commands to run. new line delimited'
+    required: false
+    default: ''
+    
+
+outputs:
+  argocd:
+    description: "Argocd path"
+    value: ${{ steps.setup-argocd.outputs.argocd }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup ArgoCD Cli
+      id: setup-argocd
+      shell: bash
+      run: |
+        curl -sSL -o /tmp/argocd https://github.com/argoproj/argo-cd/releases/download/v1.7.14/argocd-linux-amd64
+        chmod +x /tmp/argocd
+
+        echo "::set-output name=argocd::/tmp/argocd"
+
+        OPTIONS="--port-forward-namespace ${{ inputs.namespace }} --port-forward --plaintext"
+
+        argocd login --username '${{ inputs.username }}' --password '${{ inputs.password }}' $OPTIONS
+
+        if [[ -n "${{ inputs.commands }}" ]]; then
+          IFS='\n'
+          read -a commands <<< "${{ inputs.commands }}"
+          
+          for i in $commands
+          do
+            echo "$commands $OPTIONS"
+          done
+        fi
