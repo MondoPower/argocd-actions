@@ -41,7 +41,7 @@ runs:
         argocd login --username '${{ inputs.username }}' --password '${{ inputs.password }}' $OPTIONS
 
         if [[ -n "${{ inputs.commands }}" ]]; then
-          IFS="\n"
+          IFS=";"
           read -r -a array <<< "${{ inputs.commands }}"
           for i in "${array[@]}"
           do
