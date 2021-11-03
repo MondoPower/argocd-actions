@@ -46,7 +46,7 @@ runs:
           for i in "${array[@]}"
           do
             if [[ $i =~ " -- " ]]; then
-              command="${i/ -- /${OPTIONS}}"
+              command="${i/ -- / ${OPTIONS} -- }"
             else
               command="${i} ${OPTIONS}"
             fi
