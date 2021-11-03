@@ -45,7 +45,11 @@ runs:
           read -r -a array <<< "${{ inputs.commands }}"
           for i in "${array[@]}"
           do
-            command="${i} ${OPTIONS}"
+            if [[ $i =~ " -- " ]]; then
+              command="${i}/ -- /${OPTIONS}"
+            else
+              command="${i} ${OPTIONS}"
+            fi
             echo $command
             eval $command
           done
